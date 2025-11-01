@@ -1,4 +1,5 @@
-import { Hands, Results, HAND_CONNECTIONS } from '@mediapipe/hands';
+import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands';
+import type { Results } from '@mediapipe/hands';
 import { Camera } from '@mediapipe/camera_utils';
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 import { HandSign } from '@jutsu-clash/shared';
@@ -139,7 +140,7 @@ export class GestureRecognizer {
     this.canvasCtx.restore();
   }
 
-  private recognizeGesture(landmarks: any, handedness: string): GestureResult {
+  private recognizeGesture(landmarks: any, _handedness: string): GestureResult {
     // This is a simplified gesture recognition system
     // In production, you would use a trained ML model or more sophisticated algorithm
 
@@ -164,7 +165,7 @@ export class GestureRecognizer {
   }
 
   private matchGesturePattern(
-    landmarks: any,
+    _landmarks: any,
     extendedFingers: boolean[]
   ): { sign: HandSign | null; confidence: number } {
     // Simplified pattern matching for the 12 zodiac hand signs
