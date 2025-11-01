@@ -1,12 +1,20 @@
-import React, { useEffect } from "react";
-import { socket } from "./lib/socket";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BattleProvider } from './contexts/BattleContext';
+import { MainMenu } from './pages/MainMenu';
+import { Battle } from './pages/Battle';
+import { Training } from './pages/Training';
 
 export default function App() {
-  useEffect(() => {
-    socket.connect();
-    socket.on("connect", () => console.log("connected", socket.id));
-    socket.on("ping-from-server", (d) => console.log("ping", d));
-    return () => { socket.disconnect(); };
-  }, []);
-  return <div className="p-6">Jutsu Clash Client POC</div>;
+  return (
+    <BrowserRouter>
+      <BattleProvider>
+        <Routes>
+          <Route path="/" element={<MainMenu />} />
+          <Route path="/battle" element={<Battle />} />
+          <Route path="/training" element={<Training />} />
+        </Routes>
+      </BattleProvider>
+    </BrowserRouter>
+  );
 }
